@@ -1,6 +1,5 @@
 #!/usr/bin/env /usr/local/bin/python3
 # encoding: utf-8
-
 """
 用于将搜狗拼音词库scel文件转换为txt文件
 @version: 0.1
@@ -9,11 +8,11 @@
 @time: 2017/3/13 13:02
 """
 
-from io import BufferedReader
 import glob
-import struct
 import os
 import re
+import struct
+from io import BufferedReader
 
 
 def __read_utf16_str(open_file, offset=-1, read_len=2):
@@ -131,17 +130,20 @@ def transform_and_save(source_file_or_dir, target_file):
 #
 #    transform_and_save(source_file_or_dir, target_file)
 
+
 def detect_folders(input_dir):
     dbtype_list = os.listdir(input_dir)
-    folder_list=[]
+    folder_list = []
     for dbtype in dbtype_list:
-        if os.path.isfile(os.path.join(input_dir,dbtype))==False:
-            folder_list.append(os.path.join(input_dir,dbtype))
+        if os.path.isfile(os.path.join(input_dir, dbtype)) == False:
+            folder_list.append(os.path.join(input_dir, dbtype))
     return folder_list
 
-scel_dir='./download_scels'
-category_dirs=detect_folders(scel_dir)
+
+scel_dir = './download_scels'
+category_dirs = detect_folders(scel_dir)
 for i in range(len(category_dirs)):
-    print('INFO:Processing '+str(i+1)+' of '+str(len(category_dirs)))
-    cate_name=re.sub('.*download_scels/','',category_dirs[i])
-    transform_and_save(category_dirs[i], "./sougou_dicts/"+cate_name+'.txt')
+    print('INFO:Processing ' + str(i + 1) + ' of ' + str(len(category_dirs)))
+    cate_name = re.sub('.*download_scels/', '', category_dirs[i])
+    transform_and_save(category_dirs[i],
+                       "./sougou_dicts/" + cate_name + '.txt')
