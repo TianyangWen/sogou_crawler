@@ -53,17 +53,20 @@ def collect_urls(single_category):
         f.writelines(download_links)
     print('INFO:Collected ' + str(len(download_links)) + ' urls')
 
+def main():
+    categories = get_main_categories()
+    extend_categories = [
+        'https://pinyin.sogou.com/dict/cate/index/180',  #北京
+        'https://pinyin.sogou.com/dict/cate/index/366',  #国外
+        'https://pinyin.sogou.com/dict/cate/index/306',  #上海
+        'https://pinyin.sogou.com/dict/cate/index/330',  #香港
+        'https://pinyin.sogou.com/dict/cate/index/318',  #台湾
+    ]
+    categories += extend_categories
 
-categories = get_main_categories()
-extend_categories = [
-    'https://pinyin.sogou.com/dict/cate/index/180',  #北京
-    'https://pinyin.sogou.com/dict/cate/index/366',  #国外
-    'https://pinyin.sogou.com/dict/cate/index/306',  #上海
-    'https://pinyin.sogou.com/dict/cate/index/330',  #香港
-    'https://pinyin.sogou.com/dict/cate/index/318',  #台湾
-]
-categories += extend_categories
+    for i in range(len(categories)):
+        print('INFO:Processing ' + str(i + 1) + ' of ' + str(len(categories)))
+        collect_urls(categories[i])
 
-for i in range(len(categories)):
-    print('INFO:Processing ' + str(i + 1) + ' of ' + str(len(categories)))
-    collect_urls(categories[i])
+if __name__ == "__main__":
+    main()

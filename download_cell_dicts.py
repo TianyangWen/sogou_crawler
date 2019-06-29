@@ -39,11 +39,14 @@ def download_single_category(input_txt):
                   "wb") as code:
             code.write(page_request.content)
 
+def main():
+    url_filenames = list_all_files('./dict_download_urls')
 
-url_filenames = list_all_files('./dict_download_urls')
+    for file in url_filenames:
+        print('INFO:Processing ' + str(file + 1) + ' of ' +
+            str(len(url_filenames)))
+        if file[-4:] == '.txt':
+            download_single_category(file)
 
-for file in url_filenames:
-    print('INFO:Processing ' + str(file + 1) + ' of ' +
-          str(len(url_filenames)))
-    if file[-4:] == '.txt':
-        download_single_category(file)
+if __name__ == "__main__":
+    main()
